@@ -1,8 +1,14 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list v-if="Object.keys(tasks).length" separator bordered>
-      <task v-for="(task, key) in tasks" :key="key" :task="task" :id="key"></task>
-    </q-list>
+    <no-tasks
+      v-if="!Object.keys(tasksTodo).length"
+      class="q-mb-md"
+      @showAddTask="showAddTask = true"
+    ></no-tasks>
+    <tasks-Todo :tasksTodo="tasksTodo" />
+
+    <tasks-Completed :tasksCompleted="tasksCompleted" />
+
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn @click="showAddTask = true" round color="primary" size="24px" icon="add" />
     </div>
@@ -21,11 +27,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("tasks", ["tasks"])
+    ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
   },
   components: {
-    task: require("components/tasks/task.vue").default,
-    "add-task": require("components/tasks/modals/AddTask.vue").default
+    "add-task": require("components/tasks/modals/AddTask.vue").default,
+    "tasks-Todo": require("components/tasks/tasksTodo.vue").default,
+    "tasks-Completed": require("components/tasks/tasksCompleted.vue").default,
+    noTasks: require("components/tasks/noTasks.vue").default
   }
 };
 </script>
