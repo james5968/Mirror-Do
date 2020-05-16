@@ -16,7 +16,9 @@
         ref="email"
         stack-label
         class="col"
-        :rules="[ val => isValidEmail(val) || 'Please enter a valid email address.']"
+        :rules="[
+          val => isValidEmail(val) || 'Please enter a valid email address.'
+        ]"
         lazy-rules
       />
     </div>
@@ -29,7 +31,7 @@
         ref="password"
         type="password"
         class="col"
-        :rules="[ val => val.length >= 6 || 'Please use at least 6 characters.']"
+        :rules="[val => val.length >= 6 || 'Please use at least 6 characters.']"
         lazy-rules
       />
     </div>
@@ -41,6 +43,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   props: ["tab"],
   data() {
@@ -52,6 +55,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions("auth", ["registerUser", "loginUser"]),
     isValidEmail(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
@@ -61,9 +65,9 @@ export default {
       this.$refs.password.validate();
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
         if (this.tab == "login") {
-          console.log("login");
+          this.loginUser(this.formData);
         } else if (this.tab == "register") {
-          console.log("register");
+          this.registerUser(this.formData);
         }
       }
     }

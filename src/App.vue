@@ -5,13 +5,15 @@
 </template>
 
 <script>
-import{mapActions} from 'vuex'
+import { mapActions } from "vuex";
 export default {
-  mounted(){
-    this.getSettings()
+  mounted() {
+    this.getSettings();
+    this.handleAuthState();
   },
-  methods:{
-    ...mapActions('settings',['getSettings'])
+  methods: {
+    ...mapActions("settings", ["getSettings"]),
+    ...mapActions("auth", ["handleAuthState"])
   }
-}
+};
 </script>

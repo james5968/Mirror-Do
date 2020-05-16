@@ -3,7 +3,22 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title class="absolute-center">Mirror Do</q-toolbar-title>
-        <q-btn to="/auth" flat icon-right="account_circle" label="Login" class="absolute-right" />
+        <q-btn
+          v-if="!loggedIn"
+          to="/auth"
+          flat
+          icon-right="account_circle"
+          label="Login"
+          class="absolute-right"
+        />
+        <q-btn
+          v-else
+          @click="logoutUser"
+          flat
+          icon-right="account_circle"
+          label="Logout"
+          class="absolute-right"
+        />
       </q-toolbar>
     </q-header>
     <q-footer>
@@ -40,7 +55,7 @@
             <q-icon :name="nav.icon" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{nav.label}}</q-item-label>
+            <q-item-label>{{ nav.label }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -53,6 +68,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "MainLayout",
 
@@ -72,15 +88,12 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    ...mapState("auth", ["loggedIn"])
+  },
+  methods: {
+    ...mapActions("auth", ["logoutUser"])
   }
 };
 </script>
-<style lang="sass">
-@media screen and (min-width: 768px)
-  .q-footer
-    display: none
-
-.q-drawer
-  .q-router-link--exact-active
-    color: rgb(255, 255, 255) !important
-</style>
