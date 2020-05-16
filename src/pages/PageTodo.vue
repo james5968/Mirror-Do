@@ -1,16 +1,35 @@
 <template>
-  <q-page class="q-pa-md">
-    <no-tasks
-      v-if="!Object.keys(tasksTodo).length"
-      class="q-mb-md"
-      @showAddTask="showAddTask = true"
-    ></no-tasks>
-    <tasks-Todo :tasksTodo="tasksTodo" />
+  <q-page>
+    <div class="q-pa-md absolute full-width full-height column">
+      <div class="row q-mb-lg">
+        <search />
+        <sort />
+      </div>
 
-    <tasks-Completed :tasksCompleted="tasksCompleted" />
+      <p
+        v-if="!Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length && search"
+      >No search results.</p>
+      <q-scroll-area class="q-scroll-area-tasks">
+        <no-tasks
+          v-if="!Object.keys(tasksTodo).length && !search && !settings.showTasksOneList"
+          class="q-mb-md"
+        ></no-tasks>
+        <tasks-Todo :tasksTodo="tasksTodo" />
 
-    <div class="absolute-bottom text-center q-mb-lg">
-      <q-btn @click="showAddTask = true" round color="primary" size="24px" icon="add" />
+        <tasks-Completed :tasksCompleted="tasksCompleted" class="q-mb-xl" />
+      </q-scroll-area>
+
+      <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
+        <q-btn
+          @click="showAddTask = true"
+          round
+          color="primary"
+          style="opacity:70%;"
+          size="24px"
+          icon="add"
+          class="all-pointer-events"
+        />
+      </div>
     </div>
     <q-dialog v-model="showAddTask">
       <add-task @close="showAddTask = false" />
@@ -19,7 +38,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
@@ -27,13 +46,22 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
+    ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"]),
+    ...mapGetters("settings", ["settings"]),
+    ...mapState("tasks", ["search"])
   },
   components: {
     "add-task": require("components/tasks/modals/AddTask.vue").default,
     "tasks-Todo": require("components/tasks/tasksTodo.vue").default,
     "tasks-Completed": require("components/tasks/tasksCompleted.vue").default,
-    noTasks: require("components/tasks/noTasks.vue").default
+    noTasks: require("components/tasks/noTasks.vue").default,
+    search: require("components/tasks/tools/search.vue").default,
+    sort: require("components/tasks/tools/sort.vue").default
+  },
+  mounted() {
+    this.$root.$on("showAddTask", () => {
+      this.showAddTask = true;
+    });
   }
 };
 </script>
