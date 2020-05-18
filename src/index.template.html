@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= htmlWebpackPlugin.options.productName %></title>
 
-    <meta charset="utf-8">
-    <meta name="description" content="<%= htmlWebpackPlugin.options.productDescription %>">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (htmlWebpackPlugin.options.ctx.mode.cordova || htmlWebpackPlugin.options.ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>">
+<head>
+    <title>
+        <%= htmlWebpackPlugin.options.productName %>
+    </title>
 
-    <link rel="icon" type="image/png" sizes="128x128" href="statics/icons/favicon-128x128.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="statics/icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="statics/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="statics/icons/favicon-16x16.png">
-    <link rel="icon" type="image/ico" href="statics/icons/favicon.ico">
-  </head>
-  <body>
+    <meta charset="utf-8" />
+    <meta name="description" content="<%= htmlWebpackPlugin.options.productDescription %>" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (htmlWebpackPlugin.options.ctx.mode.cordova || htmlWebpackPlugin.options.ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>" />
+
+    <link rel="icon" type="image/png" sizes="128x128" href="statics/icons/icon_128.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="statics/icons/icon_96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="statics/icons/icon_32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="statics/icons/icon_16.png" />
+    <link rel="icon" type="image/ico" href="statics/icons/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="24x24" href="statics/icons/icon_24.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="statics/icons/icon_96.png" />
+    <link rel="icon" type="image/png" sizes="144x144" href="statics/icons/icon_144.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="statics/icons/icon_192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="statics/icons/icon_512.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="statics/icons/icon_48.png" />
+    <link rel="icon" type="image/png" sizes="72x72" href="statics/icons/icon_72.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="statics/icons/icon_152.png" />
+</head>
+
+<body>
     <!-- DO NOT touch the following DIV -->
     <div id="q-app"></div>
-  </body>
+</body>
+
 </html>

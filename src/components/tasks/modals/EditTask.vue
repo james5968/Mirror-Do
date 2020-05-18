@@ -4,6 +4,7 @@
     <q-form @submit.prevent="submitForm">
       <q-card-section>
         <modal-task-name :name.sync="taskToSubmit.name" ref="modalTaskName" />
+        <modal-list :list.sync="taskToSubmit.list" />
         <modal-due-date :dueDate.sync="taskToSubmit.dueDate" />
 
         <modal-due-time
